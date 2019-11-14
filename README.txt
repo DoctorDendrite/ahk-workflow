@@ -67,3 +67,4 @@
         
     Added '-Full' switch to differentiate terse and verbose output
     
+*. 2019_11_13   New: README.md
