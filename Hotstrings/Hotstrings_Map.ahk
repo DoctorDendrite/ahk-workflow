@@ -1,6 +1,143 @@
-#Include %A_ScriptDir%\Monitor.ahk
+﻿#SingleInstance Force
 #Persistent
-#SingleInstance Force
+#Include %A_ScriptDir%\Monitor.ahk
+
+
+; **********************
+; * --- DICTIONARY --- *
+; **********************
+
+if (!__names) {
+	__names:= {}
+}
+if (!__help) {
+	__help:= {}
+}
+__names["stop"] := "function_0000"
+__names["start"] := "function_0001"
+__names["kill"] := "function_0002"
+__names["panic"] := "function_0003"
+__names["help"] := "function_0004"
+__names["ppane"] := "function_0005"
+__names["preview"] := "function_0005"
+__names["dpane"] := "function_0006"
+__names["details"] := "function_0006"
+__names["calendar"] := "function_0007"
+__names["formats"] := "function_0008"
+__names["list"] := "function_0009"
+__names["t"] := "function_0010"
+__names["titlecase"] := "function_0010"
+__names["tounix"] := "function_0011"
+__names["todos"] := "function_0012"
+__names["tab2space"] := "function_0013"
+__names["block"] := "function_0014"
+__names["block_tab4"] := "function_0015"
+__names["block_tab8"] := "function_0016"
+__names["condense"] := "function_0017"
+__names["condense_tab4"] := "function_0018"
+__names["condense_tab8"] := "function_0019"
+__names["top"] := "function_0020"
+__names["date"] := "function_0021"
+__names["prettydate"] := "function_0022"
+__names["time"] := "function_0023"
+__names["datetime"] := "function_0024"
+__names["last"] := "function_0025"
+__names["title"] := "function_0026"
+__names["d_title"] := "function_0027"
+__names["dt_title"] := "function_0028"
+__names["d_-_title"] := "function_0029"
+__names["dt_-_title"] := "function_0030"
+__names["last_Sun"] := "function_0031"
+__names["lSun"] := "function_0031"
+__names["last_Mon"] := "function_0032"
+__names["lMon"] := "function_0032"
+__names["last_Tue"] := "function_0033"
+__names["lTue"] := "function_0033"
+__names["last_Wed"] := "function_0034"
+__names["lWed"] := "function_0034"
+__names["last_Thu"] := "function_0035"
+__names["lThu"] := "function_0035"
+__names["last_Fri"] := "function_0036"
+__names["lFri"] := "function_0036"
+__names["last_Sat"] := "function_0037"
+__names["lSat"] := "function_0037"
+__names["next_Sun"] := "function_0038"
+__names["nSun"] := "function_0038"
+__names["next_Mon"] := "function_0039"
+__names["nMon"] := "function_0039"
+__names["next_Tue"] := "function_0040"
+__names["nTue"] := "function_0040"
+__names["next_Wed"] := "function_0041"
+__names["nWed"] := "function_0041"
+__names["next_Thu"] := "function_0042"
+__names["nThu"] := "function_0042"
+__names["next_Fri"] := "function_0043"
+__names["nFri"] := "function_0043"
+__names["next_Sat"] := "function_0044"
+__names["nSat"] := "function_0044"
+__help["stop"] := "Temporarily disable this script"
+__help["start"] := "Re-enable this script"
+__help["kill"] := "Terminate AutoHotkey and the expected compiled version of this script"
+__help["panic"] := "Kill all Web browser applications"
+__help["help"] := "Display Help Message"
+__help["ppane"] := "Toggle Preview Pane in Windows Explorer"
+__help["preview"] := ""
+__help["dpane"] := "Toggle Details Pane in Windows Explorer"
+__help["details"] := ""
+__help["calendar"] := "Opens a date-select calendar, allowing the user to choose a date to replace this hotstring with"
+__help["formats"] := "Opens a list of title formats, allowing the user to choose one to replace this hotstring with"
+__help["list"] := ""
+__help["t"] := "Replace with the title-case version of the clipboard string"
+__help["titlecase"] := ""
+__help["tounix"] := "Replace backslashes with slashes"
+__help["todos"] := "Replace slashes with backslashes"
+__help["tab2space"] := "Replace all tabs with spaces on the clipboard"
+__help["block"] := ""
+__help["block_tab4"] := ""
+__help["block_tab8"] := ""
+__help["condense"] := ""
+__help["condense_tab4"] := ""
+__help["condense_tab8"] := ""
+__help["top"] := "Replace with the device ID of the top logical disk drive"
+__help["date"] := "Replace with current date in standard ""yyyy_MM_dd"" format"
+__help["prettydate"] := "Replace with current date in pretty ""d MMMM yyyy"" format"
+__help["time"] := "Replace with current time"
+__help["datetime"] := "Replace with current date and time"
+__help["last"] := "Replace with the latest datetime string occurring in the currently active explorer window"
+__help["title"] := "Replace with a title-corrected string from the Clipboard"
+__help["d_title"] := "Replace with current date and title string"
+__help["dt_title"] := "Replace with current date and time and title string"
+__help["d_-_title"] := "Replace with current date and title string"
+__help["dt_-_title"] := "Replace with current date and time and title string"
+__help["last_Sun"] := ""
+__help["lSun"] := ""
+__help["last_Mon"] := ""
+__help["lMon"] := ""
+__help["last_Tue"] := ""
+__help["lTue"] := ""
+__help["last_Wed"] := ""
+__help["lWed"] := ""
+__help["last_Thu"] := ""
+__help["lThu"] := ""
+__help["last_Fri"] := ""
+__help["lFri"] := ""
+__help["last_Sat"] := ""
+__help["lSat"] := ""
+__help["next_Sun"] := ""
+__help["nSun"] := ""
+__help["next_Mon"] := ""
+__help["nMon"] := ""
+__help["next_Tue"] := ""
+__help["nTue"] := ""
+__help["next_Wed"] := ""
+__help["nWed"] := ""
+__help["next_Thu"] := ""
+__help["nThu"] := ""
+__help["next_Fri"] := ""
+__help["nFri"] := ""
+__help["next_Sat"] := ""
+__help["nSat"] := ""
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; --- Global Variables --- ;
@@ -19,6 +156,51 @@ __browser_process_names := [
     , "MicrosoftEdge.exe"
     , "iexplore.exe"]
     
+
+
+; **********************
+; * --- MAIN ENTRY --- *
+; **********************
+
+Call(key) {
+    global
+    Func(__names[key]).Call()
+}
+
+Show(command, key) {
+    global
+    StringUpper, command, command
+
+    if (command = "HELP") {
+        MsgBox, % __help[key]
+    }
+}
+
+Main() {
+	params := []
+
+	for index, param in A_Args {
+		if (StrLen(param) > 0) {
+			params.Push(param)
+		}
+	}
+
+	if (params.MaxIndex() = 1) {
+		Call(params[1])
+		Monitor.Exit()
+	} else if (params.MaxIndex() > 1) {
+		Show(params[1], params[2])
+		Monitor.Exit()
+	}
+}
+
+Main()
+
+
+; *******************
+; * --- CONTENT --- *
+; *******************
+
 ;;;;;;;;;;;;;;;;;;;;;
 ; --- Functions --- ;
 ;;;;;;;;;;;;;;;;;;;;;
@@ -481,63 +663,25 @@ ListHotkeys(use_confirmation_dialog) {
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Temporarily disable this script
-::;stop;::
-    Monitor.Disable()
-    return
     
 ; Re-enable this script
-::;start;::
-    Monitor.Enable()
-    return
     
 ; Terminate AutoHotkey and the expected compiled version of this script
-::;kill;::
-    master_proc := Monitor.MasterProcessName()  
-    processes := ["AutoHotkey.exe", master_proc]
-    msg := GetKillAllMessage(processes)
-    Monitor.Override("KillAllProcesses", processes, master_proc, msg)
-    return
     
 ; Kill all Web browser applications
-::;panic;::
-    msg := GetKillAllMessage(processes)
-    Monitor.Override("KillAllProcesses", __browser_process_names)
-    return
     
 ; Display Help Message
-::;help;::
-    Monitor.Override("DisplayHelpMessage")
-    return
     
 ; Toggle Preview Pane in Windows Explorer
-::;ppane;::
-::;preview;::
-    Monitor.Override("TogglePaneInExplorer", "p")
-    return
     
 ; Toggle Details Pane in Windows Explorer
-::;dpane;::
-::;details;::
-    Monitor.Override("TogglePaneInExplorer", "d")
-    return
     
 ; Opens a date-select calendar, allowing the user to choose a date to replace this
 ; hotstring with
-::;calendar;::
-	Monitor.Block()
-    Monitor.VerifyAndGo("ShowCalendar")
-    return
     
 ; Opens a list of title formats, allowing the user to choose one to replace this
 ; hotstring with
-::;formats;::
-	Monitor.Block()
-    Monitor.VerifyAndGo("ShowTitleFormatListView")
-    return
     
-::;list;::
-	Monitor.Override("ListHotkeys", !A_ThisHotkey)
-    return
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; --- String Replacers --- ;
@@ -547,190 +691,69 @@ ListHotkeys(use_confirmation_dialog) {
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Replace with the title-case version of the clipboard string
-:*:;t;::
-:*:;titlecase;::
-    Monitor.Run("ToTitleCase", Clipboard)
-    return
     
 ; Replace backslashes with slashes
-:*:;tounix;::
-    Monitor.Run("ToUnixString", Clipboard)
-    return
     
 ; Replace slashes with backslashes
-:*:;todos;::
-    Monitor.Run("ToDosString", Clipboard)
-    return
     
 ; Alter content on the clipboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Replace all tabs with spaces on the clipboard
-:*:;tab2space;::
-    Monitor.Clip("ReplaceTabsWithSpaces", Clipboard)
-    return
     
-:*:;block;::
-    Monitor.Override("PasteBlockText", Clipboard, __tab_size, __note_width)
-    return
     
-:*:;block_tab4;::
-    Monitor.Run("PasteBlockText", Clipboard, 4, __note_width)
-    return
     
-:*:;block_tab8;::
-    Monitor.Run("PasteBlockText", Clipboard, 8, __note_width)
-    return
     
-:*:;condense;::
-    Monitor.Override("PasteCondensedBlockText", Clipboard, __tab_size, __note_width)
-    return
     
-:*:;condense_tab4;::
-    Monitor.Run("PasteCondensedBlockText", Clipboard, 4, __note_width)
-    return
     
-:*:;condense_tab8;::
-    Monitor.Run("PasteCondensedBlockText", Clipboard, 8, __note_width)
-    return
     
 ; Replace hotstring
 ;;;;;;;;;;;;;;;;;;;
 
 ; Replace with the device ID of the top logical disk drive
-:*:;top;::
-    Monitor.Run("GetTopLogicalDiskId")
-    return
     
 ; Replace with current date in standard "yyyy_MM_dd" format
-:*:;date;::
-    Monitor.Run("GetStdDate")
-    return
     
 ; Replace with current date in pretty "d MMMM yyyy" format
-:*:;prettydate;::
-    Monitor.Run("GetPrettyDate")
-    return
     
 ; Replace with current time
-:*:;time;::
-    Monitor.Run("GetTime")
-    return
     
 ; Replace with current date and time
-:*:;datetime;::
-    Monitor.Run("GetDateAndTime")
-    return
     
 ; Replace with the latest datetime string occurring in
 ; the currently active explorer window
-:*:;last;::
-    Monitor.Run("GetLatestDatedItemNameInExplorerWindow")
-    return
     
 ; Replace with a title-corrected string from the Clipboard
-:*:;title;::
-    ; Run("ToUpperCamelCase", Clipboard)
-    Monitor.Run("GetSubtitle", Clipboard, __secnd_separator)
-    return
     
 ; Replace with current date and title string
-:*:;d_title;::
-    Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_", __secnd_separator)
-    return
     
 ; Replace with current date and time and title string
-:*:;dt_title;::
-    Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_", __secnd_separator)
-    return
     
 ; Replace with current date and title string
-:*:;d_-_title;::
-    Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_-_", __secnd_separator)
-    return
     
 ; Replace with current date and time and title string
-:*:;dt_-_title;::
-    Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_-_", __secnd_separator)
-    return
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; --- Replace With Last Weekday's Date --- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-:*:;last_Sun;::
-:*:;lSun;::
-    Monitor.Run("GetLastDate", 1)
-    return
     
-:*:;last_Mon;::
-:*:;lMon;::
-    Monitor.Run("GetLastDate", 2)
-    return
     
-:*:;last_Tue;::
-:*:;lTue;::
-    Monitor.Run("GetLastDate", 3)
-    return
     
-:*:;last_Wed;::
-:*:;lWed;::
-    Monitor.Run("GetLastDate", 4)
-    return
     
-:*:;last_Thu;::
-:*:;lThu;::
-    Monitor.Run("GetLastDate", 5)
-    return
     
-:*:;last_Fri;::
-:*:;lFri;::
-    Monitor.Run("GetLastDate", 6)
-    return
     
-:*:;last_Sat;::
-:*:;lSat;::
-    Monitor.Run("GetLastDate", 7)
-    return
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; --- Replace With Next Weekday's Date --- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-:*:;next_Sun;::
-:*:;nSun;::
-    Monitor.Run("GetNextDate", 1)
-    return
     
-:*:;next_Mon;::
-:*:;nMon;::
-    Monitor.Run("GetNextDate", 2)
-    return
     
-:*:;next_Tue;::
-:*:;nTue;::
-    Monitor.Run("GetNextDate", 3)
-    return
     
-:*:;next_Wed;::
-:*:;nWed;::
-    Monitor.Run("GetNextDate", 4)
-    return
     
-:*:;next_Thu;::
-:*:;nThu;::
-    Monitor.Run("GetNextDate", 5)
-    return
     
-:*:;next_Fri;::
-:*:;nFri;::
-    Monitor.Run("GetNextDate", 6)
-    return
     
-:*:;next_Sat;::
-:*:;nSat;::
-    Monitor.Run("GetNextDate", 7)
-    return
     
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; --- Subroutines --- ;
@@ -879,3 +902,310 @@ GuiEscape:
 	Monitor.Unblock()
     Return
     
+
+
+; ***********************
+; * --- DEFINITIONS --- *
+; ***********************
+
+function_0000() {
+    global
+    return Monitor.Disable()
+}
+
+function_0001() {
+    global
+    return Monitor.Enable()
+}
+
+function_0002() {
+    global
+    master_proc := Monitor.MasterProcessName()  
+    processes := ["AutoHotkey.exe", master_proc]
+    msg := GetKillAllMessage(processes)
+    return Monitor.Override("KillAllProcesses", processes, master_proc, msg)
+}
+
+function_0003() {
+    global
+    msg := GetKillAllMessage(processes)
+    return Monitor.Override("KillAllProcesses", __browser_process_names)
+}
+
+function_0004() {
+    global
+    return Monitor.Override("DisplayHelpMessage")
+}
+
+function_0005() {
+    global
+    return Monitor.Override("TogglePaneInExplorer", "p")
+}
+
+function_0006() {
+    global
+    return Monitor.Override("TogglePaneInExplorer", "d")
+}
+
+function_0007() {
+    global
+	Monitor.Block()
+    return Monitor.VerifyAndGo("ShowCalendar")
+}
+
+function_0008() {
+    global
+	Monitor.Block()
+    return Monitor.VerifyAndGo("ShowTitleFormatListView")
+}
+
+function_0009() {
+    global
+    return Monitor.Override("ListHotkeys", !A_ThisHotkey)
+}
+
+function_0010() {
+    global
+    return Monitor.Run("ToTitleCase", Clipboard)
+}
+
+function_0011() {
+    global
+    return Monitor.Run("ToUnixString", Clipboard)
+}
+
+function_0012() {
+    global
+    return Monitor.Run("ToDosString", Clipboard)
+}
+
+function_0013() {
+    global
+    return Monitor.Clip("ReplaceTabsWithSpaces", Clipboard)
+}
+
+function_0014() {
+    global
+    return Monitor.Override("PasteBlockText", Clipboard, __tab_size, __note_width)
+}
+
+function_0015() {
+    global
+    return Monitor.Run("PasteBlockText", Clipboard, 4, __note_width)
+}
+
+function_0016() {
+    global
+    return Monitor.Run("PasteBlockText", Clipboard, 8, __note_width)
+}
+
+function_0017() {
+    global
+    return Monitor.Override("PasteCondensedBlockText", Clipboard, __tab_size, __note_width)
+}
+
+function_0018() {
+    global
+    return Monitor.Run("PasteCondensedBlockText", Clipboard, 4, __note_width)
+}
+
+function_0019() {
+    global
+    return Monitor.Run("PasteCondensedBlockText", Clipboard, 8, __note_width)
+}
+
+function_0020() {
+    global
+    return Monitor.Run("GetTopLogicalDiskId")
+}
+
+function_0021() {
+    global
+    return Monitor.Run("GetStdDate")
+}
+
+function_0022() {
+    global
+    return Monitor.Run("GetPrettyDate")
+}
+
+function_0023() {
+    global
+    return Monitor.Run("GetTime")
+}
+
+function_0024() {
+    global
+    return Monitor.Run("GetDateAndTime")
+}
+
+function_0025() {
+    global
+    return Monitor.Run("GetLatestDatedItemNameInExplorerWindow")
+}
+
+function_0026() {
+    global
+    ; Run("ToUpperCamelCase", Clipboard)
+    return Monitor.Run("GetSubtitle", Clipboard, __secnd_separator)
+}
+
+function_0027() {
+    global
+    return Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_", __secnd_separator)
+}
+
+function_0028() {
+    global
+    return Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_", __secnd_separator)
+}
+
+function_0029() {
+    global
+    return Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_-_", __secnd_separator)
+}
+
+function_0030() {
+    global
+    return Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_-_", __secnd_separator)
+}
+
+function_0031() {
+    global
+    return Monitor.Run("GetLastDate", 1)
+}
+
+function_0032() {
+    global
+    return Monitor.Run("GetLastDate", 2)
+}
+
+function_0033() {
+    global
+    return Monitor.Run("GetLastDate", 3)
+}
+
+function_0034() {
+    global
+    return Monitor.Run("GetLastDate", 4)
+}
+
+function_0035() {
+    global
+    return Monitor.Run("GetLastDate", 5)
+}
+
+function_0036() {
+    global
+    return Monitor.Run("GetLastDate", 6)
+}
+
+function_0037() {
+    global
+    return Monitor.Run("GetLastDate", 7)
+}
+
+function_0038() {
+    global
+    return Monitor.Run("GetNextDate", 1)
+}
+
+function_0039() {
+    global
+    return Monitor.Run("GetNextDate", 2)
+}
+
+function_0040() {
+    global
+    return Monitor.Run("GetNextDate", 3)
+}
+
+function_0041() {
+    global
+    return Monitor.Run("GetNextDate", 4)
+}
+
+function_0042() {
+    global
+    return Monitor.Run("GetNextDate", 5)
+}
+
+function_0043() {
+    global
+    return Monitor.Run("GetNextDate", 6)
+}
+
+function_0044() {
+    global
+    return Monitor.Run("GetNextDate", 7)
+}
+
+
+; **********************
+; * --- HOTSTRINGS --- *
+; **********************
+
+::;stop;::
+::;start;::
+::;kill;::
+::;panic;::
+::;help;::
+::;ppane;::
+::;preview;::
+::;dpane;::
+::;details;::
+::;calendar;::
+::;formats;::
+::;list;::
+:*:;t;::
+:*:;titlecase;::
+:*:;tounix;::
+:*:;todos;::
+:*:;tab2space;::
+:*:;block;::
+:*:;block_tab4;::
+:*:;block_tab8;::
+:*:;condense;::
+:*:;condense_tab4;::
+:*:;condense_tab8;::
+:*:;top;::
+:*:;date;::
+:*:;prettydate;::
+:*:;time;::
+:*:;datetime;::
+:*:;last;::
+:*:;title;::
+:*:;d_title;::
+:*:;dt_title;::
+:*:;d_-_title;::
+:*:;dt_-_title;::
+:*:;last_Sun;::
+:*:;lSun;::
+:*:;last_Mon;::
+:*:;lMon;::
+:*:;last_Tue;::
+:*:;lTue;::
+:*:;last_Wed;::
+:*:;lWed;::
+:*:;last_Thu;::
+:*:;lThu;::
+:*:;last_Fri;::
+:*:;lFri;::
+:*:;last_Sat;::
+:*:;lSat;::
+:*:;next_Sun;::
+:*:;nSun;::
+:*:;next_Mon;::
+:*:;nMon;::
+:*:;next_Tue;::
+:*:;nTue;::
+:*:;next_Wed;::
+:*:;nWed;::
+:*:;next_Thu;::
+:*:;nThu;::
+:*:;next_Fri;::
+:*:;nFri;::
+:*:;next_Sat;::
+:*:;nSat;::
+    Call(Trim(Monitor.GetHotkeyName(A_ThisHotkey), ";"))
+    return

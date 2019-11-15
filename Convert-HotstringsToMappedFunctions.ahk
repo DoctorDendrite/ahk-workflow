@@ -72,21 +72,25 @@ Show(command, key) {
     }
 }
 
-params := []
-
-for index, script_param in A_Args {
-    if (StrLen(param) > 0) {
-        params.Push(param)
-    }
+Main() {
+	params := []
+	
+	for index, param in A_Args {
+		if (StrLen(param) > 0) {
+			params.Push(param)
+		}
+	}
+	
+	if (params.MaxIndex() = 1) {
+		Call(params[1])
+		Monitor.Exit()
+	} else if (params.MaxIndex() > 1) {
+		Show(params[1], params[2])
+		Monitor.Exit()
+	}
 }
 
-if (params.MaxIndex() = 1) {
-    Call(params[1])
-    Monitor.Exit()
-} else if (params.MaxIndex() > 1) {
-    Show(params[1], params[2])
-    Monitor.Exit()
-}
+Main()
 )
 
 

@@ -75,3 +75,17 @@
         ``return`` -> ``break``
         
 *. 2019_11_14   New: package.json
+*. 2019_11_14   Mod: Convert-HotstringsToMappedFunctions.ahk
+
+    Bug fix on Line 78:
+    
+        ``
+        for index, script_param in A_Args {
+            if (StrLen(param) > 0) {
+        ``
+        ->
+        ``
+        for index, param in A_Args {
+            if (StrLen(param) > 0) {
+        ``
+        
