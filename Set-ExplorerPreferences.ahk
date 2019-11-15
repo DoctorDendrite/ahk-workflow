@@ -23,7 +23,7 @@ ActivateExplorerWindow() {
 		
 		if (IsWindowsExplorerClass(class)) {
 			WinActivate, ahk_id %id%
-			return
+			break
 		}
 	}
 	

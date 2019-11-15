@@ -68,3 +68,9 @@
     Added '-Full' switch to differentiate terse and verbose output
     
 *. 2019_11_13   New: README.md
+*. 2019_11_14   Mod: Set-ExplorerPreferences.ahk
+
+	Bug fix on Line 26:
+	
+		``return`` -> ``break``
+		
