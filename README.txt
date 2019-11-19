@@ -89,3 +89,16 @@
             if (StrLen(param) > 0) {
         ``
         
+*. 2019_11_19   Mod: Hotstrings\Hotstrings.ahk
+
+    Added ';rem;' hotstring:
+    
+        Line 621:
+        
+            ``
+            ; Replace with the device ID of the first removable disk drive
+            :*:;rem;::
+                Monitor.Run("GetLogicalDiskId", 2, 1)
+                return
+            ``
+            

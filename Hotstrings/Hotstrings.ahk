@@ -364,12 +364,28 @@ GetLatestDatedItemNameInExplorerWindow() {
     return GetLatestDatedItemName(GetItemNamesFromCurrentExplorerWindow())
 }
 
-GetTopLogicalDiskId() {
-    drive_type := 3
+GetLogicalDiskId(drive_type, position) {
+
+	; drive_type
+	; ----------
+	; 2 - Removable
+	; 3 - Local Fixed
+	; 
+	; position
+	; --------
+	; <= 0 - The last drive in the list
+	; >  0 - The drive at this position in the list
+	
     query := "Select * FROM Win32_LogicalDisk WHERE DriveType = " . drive_type
-    
-    for disk in (ComObjGet("winmgmts:").ExecQuery(query)) {
+    count := 0
+	
+	for disk in (ComObjGet("winmgmts:").ExecQuery(query)) {
         top_drive := disk.DeviceID
+		count := count + 1
+		
+		if (count = position) {
+			return top_drive
+		}
     }
     
     return top_drive
@@ -597,9 +613,14 @@ ListHotkeys(use_confirmation_dialog) {
 ; Replace hotstring
 ;;;;;;;;;;;;;;;;;;;
 
-; Replace with the device ID of the top logical disk drive
+; Replace with the device ID of the last local fixed disk drive
 :*:;top;::
-    Monitor.Run("GetTopLogicalDiskId")
+    Monitor.Run("GetLogicalDiskId", 3, 0)
+    return
+    
+; Replace with the device ID of the first removable disk drive
+:*:;rem;::
+    Monitor.Run("GetLogicalDiskId", 2, 1)
     return
     
 ; Replace with current date in standard "yyyy_MM_dd" format
