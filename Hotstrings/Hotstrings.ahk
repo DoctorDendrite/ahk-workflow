@@ -85,6 +85,7 @@ GetDateAndTime() {
 }
 
 GetNextDate(dayCode, factor := 1) {
+	global
     distance := factor * (dayCode - A_WDay)
     distance := distance < 0 ? 7 + distance : distance
     date := A_Year

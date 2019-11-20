@@ -102,3 +102,9 @@
                 return
             ``
             
+*. 2019_11_20   Mod: Hotstrings\Hotstrings.ahk
+
+    Bug fix on Line 88:
+    
+        Added ``global`` so `%__date_format%` expansion resolves correctly
+        
