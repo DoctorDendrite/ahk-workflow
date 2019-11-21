@@ -108,3 +108,4 @@
     
         Added ``global`` so `%__date_format%` expansion resolves correctly
         
+*. 2019_11_20   New: .gitignore
