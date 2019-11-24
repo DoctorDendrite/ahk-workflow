@@ -85,7 +85,7 @@ GetDateAndTime() {
 }
 
 GetNextDate(dayCode, factor := 1) {
-	global
+    global
     distance := factor * (dayCode - A_WDay)
     distance := distance < 0 ? 7 + distance : distance
     date := A_Year
@@ -367,26 +367,26 @@ GetLatestDatedItemNameInExplorerWindow() {
 
 GetLogicalDiskId(drive_type, position) {
 
-	; drive_type
-	; ----------
-	; 2 - Removable
-	; 3 - Local Fixed
-	; 
-	; position
-	; --------
-	; <= 0 - The last drive in the list
-	; >  0 - The drive at this position in the list
-	
+    ; drive_type
+    ; ----------
+    ; 2 - Removable
+    ; 3 - Local Fixed
+    ; 
+    ; position
+    ; --------
+    ; <= 0 - The last drive in the list
+    ; >  0 - The drive at this position in the list
+    
     query := "Select * FROM Win32_LogicalDisk WHERE DriveType = " . drive_type
     count := 0
-	
-	for disk in (ComObjGet("winmgmts:").ExecQuery(query)) {
+    
+    for disk in (ComObjGet("winmgmts:").ExecQuery(query)) {
         top_drive := disk.DeviceID
-		count := count + 1
-		
-		if (count = position) {
-			return top_drive
-		}
+        count := count + 1
+        
+        if (count = position) {
+            return top_drive
+        }
     }
     
     return top_drive
@@ -476,13 +476,13 @@ LoadConfirmationDialog() {
 }
 
 ListHotkeys(use_confirmation_dialog) {
-	if (use_confirmation_dialog) {
-		Monitor.Block()
-		ListHotkeys
-		LoadConfirmationDialog()
-	} else {
-		ListHotkeys
-	}
+    if (use_confirmation_dialog) {
+        Monitor.Block()
+        ListHotkeys
+        LoadConfirmationDialog()
+    } else {
+        ListHotkeys
+    }
 }
 
 ;;;;;;;;;;;;;;;;;;;
@@ -541,20 +541,20 @@ ListHotkeys(use_confirmation_dialog) {
 ; Hostring: Opens a date-select calendar, allowing the user to choose a date to
 ; replace this hotstring with
 ::;calendar;::
-	Monitor.Block()
+    Monitor.Block()
     Monitor.VerifyAndGo("ShowCalendar")
     return
     
 ; Hostring: Opens a list of title formats, allowing the user to choose one to replace
 ; this hotstring with
 ::;formats;::
-	Monitor.Block()
+    Monitor.Block()
     Monitor.VerifyAndGo("ShowTitleFormatListView")
     return
     
 ; Hostring: List all hotkeys
 ::;list;::
-	Monitor.Override("ListHotkeys", !A_ThisHotkey)
+    Monitor.Override("ListHotkeys", !A_ThisHotkey)
     return
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -821,9 +821,9 @@ ButtonDefaultCalendar:
     Return
     
 ButtonCancel:
-	Gosub, GuiEscape
-	Return
-	
+    Gosub, GuiEscape
+    Return
+    
 PrintDate:
     Gui, Submit
     FormatTime dateString, %MyCalendar%, %__date_format%
@@ -852,9 +852,9 @@ ShowTitleFormatListView:
     Gui, Add, Text, cgreen w500 r2 xs +Wrap vForVendetta
     Gui, Add, Button, w0 h0 Hidden Default, DefaultListView
     Gui, Show,, GetTitleFormatList
-	
-	__mapped_keys := 1
-	
+    
+    __mapped_keys := 1
+    
     Hotkey, ~F5, ResetList
     Hotkey, ~F5,, On
     Hotkey, ~^p, PrintTitle
@@ -919,18 +919,18 @@ CopyTitle:
 ;;;;;;;;;;;;;;;;;;;
 
 UnmapKeys:
-	if (__mapped_keys) {
-		Hotkey, ~F5, Off
-		Hotkey, ~^p, Off
-		Hotkey, ~^c, Off
-		__mapped_keys := 1
-	}
-	
+    if (__mapped_keys) {
+        Hotkey, ~F5, Off
+        Hotkey, ~^p, Off
+        Hotkey, ~^c, Off
+        __mapped_keys := 1
+    }
+    
     Return
     
 GuiEscape:
     Gui, Destroy
     Gosub, UnmapKeys
-	Monitor.Unblock()
+    Monitor.Unblock()
     Return
     

@@ -418,75 +418,6 @@ Main(infile, outfile) {
         FileOutLine("#Persistent", outfile)
     }
     
-    
-    
-    
-    ; it := New FileIterator(infile)
-    ; str := ""
-    ; 
-    ; it.Next(line)
-    ; 
-    ; ; MsgBox, % "Any: [" it.Any() "]"
-    ; 
-    ; while (it.Any()) {
-    ;   str := ""
-    ;   other := ""
-    ;   
-    ;   
-    ;   ; MsgBox, % "What: [" line "]"
-    ;   
-    ;   
-    ;   if (IsWhiteSpace(line)) {
-    ;       str := "IsWhiteSpace"
-    ;       
-    ;       ; MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
-    ;       it.Next(line)
-    ;       
-    ;   } else if (IsHeader(line)) {
-    ;       str := "IsHeader"
-    ;       
-    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
-    ;       it.Next(line)
-    ;       
-    ;   } else if (IsCommentBarLine(line)) {
-    ;       str := "IsCommentBarLine"
-    ;       
-    ;       GetSectionHeading(it, section_heading, lines)
-    ;       
-    ;         for index, line in lines {
-    ;             other := section_heading
-    ;         }
-    ;       
-    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
-    ;       it.Next(line)
-    ;       
-    ;   } else if (HelpSequence(line, other)) {
-    ;       str := "IsHelpSequence"
-    ;       help_str := GetDocString(it)
-    ;       
-    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
-    ;       MsgBox, %help_str%
-    ;       
-    ;       line := it.Current()
-    ;       
-    ;   } else if (HotstringSequence(line, other)) {
-    ;       str := "IsHotstringSequence"
-    ;       
-    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
-    ;       FileOutLine(line, "temp.txt")
-    ;       it.Next(line)
-    ;       
-    ;   } else {
-    ;       str := "IsOtherContent"
-    ;       it.Next(line)
-    ;   }
-    ; }
-    ; 
-    ; return
-    
-    
-    
-    
     it := New FileIterator(infile)
     
     while (it.NextNonWhiteSpace(line) and IsHeader(line)) {
@@ -611,8 +542,6 @@ Main(infile, outfile) {
         FileOutLine("; *******************", outfile)
         FileOutLine("; * --- CONTENT --- *", outfile)
         FileOutLine("; *******************`r`n", outfile)
-        
-        ; SubtractWhiteSpace(other, index, max_index)
         
         for index, key in sections.Keys() {
             for subindex, line in sections.Get(key) {
