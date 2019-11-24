@@ -119,3 +119,18 @@
 
     Redesigned FileIterator class to use File objects instead of `FileReadLine` subroutine
     
+*. 2019_11_24   Mod: Hotstrings\Monitor.ahk
+
+    Bug fix on Line 113:
+    
+        ``Monitor.SendToClipboard(output)`` -> ``Monitor.SendToClipboard(str)``
+        
+    Added `Monitor.SendUnicode` method
+    
+*. 2019_11_24   Mod: Hotstrings\Math.ahk
+
+    Added "Hotstring:" key phrases to help identify help info
+    Bug fix:
+    
+        Replaced all instances of `Monitor.Send` with `Monitor.SendUnicode`
+        
