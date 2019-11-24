@@ -36,107 +36,109 @@ __names["block_tab8"] := "function_0016"
 __names["condense"] := "function_0017"
 __names["condense_tab4"] := "function_0018"
 __names["condense_tab8"] := "function_0019"
-__names["top"] := "function_0020"
-__names["date"] := "function_0021"
-__names["prettydate"] := "function_0022"
-__names["time"] := "function_0023"
-__names["datetime"] := "function_0024"
-__names["last"] := "function_0025"
-__names["title"] := "function_0026"
-__names["d_title"] := "function_0027"
-__names["dt_title"] := "function_0028"
-__names["d_-_title"] := "function_0029"
-__names["dt_-_title"] := "function_0030"
-__names["last_Sun"] := "function_0031"
-__names["lSun"] := "function_0031"
-__names["last_Mon"] := "function_0032"
-__names["lMon"] := "function_0032"
-__names["last_Tue"] := "function_0033"
-__names["lTue"] := "function_0033"
-__names["last_Wed"] := "function_0034"
-__names["lWed"] := "function_0034"
-__names["last_Thu"] := "function_0035"
-__names["lThu"] := "function_0035"
-__names["last_Fri"] := "function_0036"
-__names["lFri"] := "function_0036"
-__names["last_Sat"] := "function_0037"
-__names["lSat"] := "function_0037"
-__names["next_Sun"] := "function_0038"
-__names["nSun"] := "function_0038"
-__names["next_Mon"] := "function_0039"
-__names["nMon"] := "function_0039"
-__names["next_Tue"] := "function_0040"
-__names["nTue"] := "function_0040"
-__names["next_Wed"] := "function_0041"
-__names["nWed"] := "function_0041"
-__names["next_Thu"] := "function_0042"
-__names["nThu"] := "function_0042"
-__names["next_Fri"] := "function_0043"
-__names["nFri"] := "function_0043"
-__names["next_Sat"] := "function_0044"
-__names["nSat"] := "function_0044"
-__help["stop"] := "Temporarily disable this script"
-__help["start"] := "Re-enable this script"
-__help["kill"] := "Terminate AutoHotkey and the expected compiled version of this script"
-__help["panic"] := "Kill all Web browser applications"
-__help["help"] := "Display Help Message"
-__help["ppane"] := "Toggle Preview Pane in Windows Explorer"
-__help["preview"] := ""
-__help["dpane"] := "Toggle Details Pane in Windows Explorer"
-__help["details"] := ""
-__help["calendar"] := "Opens a date-select calendar, allowing the user to choose a date to replace this hotstring with"
-__help["formats"] := "Opens a list of title formats, allowing the user to choose one to replace this hotstring with"
-__help["list"] := ""
-__help["t"] := "Replace with the title-case version of the clipboard string"
-__help["titlecase"] := ""
-__help["tounix"] := "Replace backslashes with slashes"
-__help["todos"] := "Replace slashes with backslashes"
-__help["tab2space"] := "Replace all tabs with spaces on the clipboard"
-__help["block"] := ""
-__help["block_tab4"] := ""
-__help["block_tab8"] := ""
-__help["condense"] := ""
-__help["condense_tab4"] := ""
-__help["condense_tab8"] := ""
-__help["top"] := "Replace with the device ID of the top logical disk drive"
-__help["date"] := "Replace with current date in standard ""yyyy_MM_dd"" format"
-__help["prettydate"] := "Replace with current date in pretty ""d MMMM yyyy"" format"
-__help["time"] := "Replace with current time"
-__help["datetime"] := "Replace with current date and time"
-__help["last"] := "Replace with the latest datetime string occurring in the currently active explorer window"
-__help["title"] := "Replace with a title-corrected string from the Clipboard"
-__help["d_title"] := "Replace with current date and title string"
-__help["dt_title"] := "Replace with current date and time and title string"
-__help["d_-_title"] := "Replace with current date and title string"
-__help["dt_-_title"] := "Replace with current date and time and title string"
-__help["last_Sun"] := ""
-__help["lSun"] := ""
-__help["last_Mon"] := ""
-__help["lMon"] := ""
-__help["last_Tue"] := ""
-__help["lTue"] := ""
-__help["last_Wed"] := ""
-__help["lWed"] := ""
-__help["last_Thu"] := ""
-__help["lThu"] := ""
-__help["last_Fri"] := ""
-__help["lFri"] := ""
-__help["last_Sat"] := ""
-__help["lSat"] := ""
-__help["next_Sun"] := ""
-__help["nSun"] := ""
-__help["next_Mon"] := ""
-__help["nMon"] := ""
-__help["next_Tue"] := ""
-__help["nTue"] := ""
-__help["next_Wed"] := ""
-__help["nWed"] := ""
-__help["next_Thu"] := ""
-__help["nThu"] := ""
-__help["next_Fri"] := ""
-__help["nFri"] := ""
-__help["next_Sat"] := ""
-__help["nSat"] := ""
+__names["last"] := "function_0020"
+__names["top"] := "function_0021"
+__names["rem"] := "function_0022"
+__names["date"] := "function_0023"
+__names["prettydate"] := "function_0024"
+__names["time"] := "function_0025"
+__names["datetime"] := "function_0026"
+__names["title"] := "function_0027"
+__names["d_title"] := "function_0028"
+__names["dt_title"] := "function_0029"
+__names["d_-_title"] := "function_0030"
+__names["dt_-_title"] := "function_0031"
+__names["last_Sun"] := "function_0032"
+__names["lSun"] := "function_0032"
+__names["last_Mon"] := "function_0033"
+__names["lMon"] := "function_0033"
+__names["last_Tue"] := "function_0034"
+__names["lTue"] := "function_0034"
+__names["last_Wed"] := "function_0035"
+__names["lWed"] := "function_0035"
+__names["last_Thu"] := "function_0036"
+__names["lThu"] := "function_0036"
+__names["last_Fri"] := "function_0037"
+__names["lFri"] := "function_0037"
+__names["last_Sat"] := "function_0038"
+__names["lSat"] := "function_0038"
+__names["next_Sun"] := "function_0039"
+__names["nSun"] := "function_0039"
+__names["next_Mon"] := "function_0040"
+__names["nMon"] := "function_0040"
+__names["next_Tue"] := "function_0041"
+__names["nTue"] := "function_0041"
+__names["next_Wed"] := "function_0042"
+__names["nWed"] := "function_0042"
+__names["next_Thu"] := "function_0043"
+__names["nThu"] := "function_0043"
+__names["next_Fri"] := "function_0044"
+__names["nFri"] := "function_0044"
+__names["next_Sat"] := "function_0045"
+__names["nSat"] := "function_0045"
+__help["stop"] := "Hostring: Temporarily disable this script"
+__help["start"] := "Hostring: Re-enable this script"
+__help["kill"] := "Hostring: Terminate AutoHotkey and the expected compiled version of this script"
+__help["panic"] := "Hostring: Kill all Web browser applications"
+__help["help"] := "Hostring: Display Help Message"
+__help["ppane"] := "Hostring: Toggle Preview Pane in Windows Explorer"
+__help["preview"] := "Hostring: Toggle Preview Pane in Windows Explorer"
+__help["dpane"] := "Hostring: Toggle Details Pane in Windows Explorer"
+__help["details"] := "Hostring: Toggle Details Pane in Windows Explorer"
+__help["calendar"] := "Hostring: Opens a date-select calendar, allowing the user to choose a date to replace this hotstring with"
+__help["formats"] := "Hostring: Opens a list of title formats, allowing the user to choose one to replace this hotstring with"
+__help["list"] := "Hostring: List all hotkeys"
+__help["t"] := "Hotstring: Replace with the title-case version of the clipboard string"
+__help["titlecase"] := "Hotstring: Replace with the title-case version of the clipboard string"
+__help["tounix"] := "Hotstring: Replace backslashes with slashes"
+__help["todos"] := "Hotstring: Replace slashes with backslashes"
+__help["tab2space"] := "Hotstring: Replace all tabs with spaces on the clipboard"
+__help["block"] := "Hotstring: Add word-wrapped line breaks to text on the clipboard; (default tab size is 4)"
+__help["block_tab4"] := "Hotstring: Add word-wrapped line breaks to text on the clipboard; (make sure the tab size is 4)"
+__help["block_tab8"] := "Hotstring: Add word-wrapped line breaks to text on the clipboard; (make sure the tab size is 8)"
+__help["condense"] := "Hotstring: Combine consecutive lines of content to a single line on the clipboard; (default tab size is 4)"
+__help["condense_tab4"] := "Hotstring: Combine consecutive lines of content to a single line on the clipboard; (make sure the tab size is 4)"
+__help["condense_tab8"] := "Hotstring: Combine consecutive lines of content to a single line on the clipboard; (make sure the tab size is 8)"
+__help["last"] := "Hotstring: Copy to clipboard the latest datetime string occurring in the currently active explorer window"
+__help["top"] := "Hotstring: Replace with the device ID of the last local fixed disk drive"
+__help["rem"] := "Hotstring: Replace with the device ID of the first removable disk drive"
+__help["date"] := "Hotstring: Replace with current date in standard ""yyyy_MM_dd"" format"
+__help["prettydate"] := "Hotstring: Replace with current date in pretty ""d MMMM yyyy"" format"
+__help["time"] := "Hotstring: Replace with current time"
+__help["datetime"] := "Hotstring: Replace with current date and time"
+__help["title"] := "Hotstring: Replace with a title-corrected string from the Clipboard"
+__help["d_title"] := "Hotstring: Replace with current date and title string"
+__help["dt_title"] := "Hotstring: Replace with current date and time and title string"
+__help["d_-_title"] := "Hotstring: Replace with current date and title string"
+__help["dt_-_title"] := "Hotstring: Replace with current date and time and title string"
+__help["last_Sun"] := "Hostring: Replace with last Sunday's date"
+__help["lSun"] := "Hostring: Replace with last Sunday's date"
+__help["last_Mon"] := "Hostring: Replace with last Monday's date"
+__help["lMon"] := "Hostring: Replace with last Monday's date"
+__help["last_Tue"] := "Hostring: Replace with last Tuesday's date"
+__help["lTue"] := "Hostring: Replace with last Tuesday's date"
+__help["last_Wed"] := "Hostring: Replace with last Wednesday's date"
+__help["lWed"] := "Hostring: Replace with last Wednesday's date"
+__help["last_Thu"] := "Hostring: Replace with last Thursday's date"
+__help["lThu"] := "Hostring: Replace with last Thursday's date"
+__help["last_Fri"] := "Hostring: Replace with last Friday's date"
+__help["lFri"] := "Hostring: Replace with last Friday's date"
+__help["last_Sat"] := "Hostring: Replace with last Saturday's date"
+__help["lSat"] := "Hostring: Replace with last Saturday's date"
+__help["next_Sun"] := "Hostring: Replace with next Sunday's date"
+__help["nSun"] := "Hostring: Replace with next Sunday's date"
+__help["next_Mon"] := "Hostring: Replace with next Monday's date"
+__help["nMon"] := "Hostring: Replace with next Monday's date"
+__help["next_Tue"] := "Hostring: Replace with next Tuesday's date"
+__help["nTue"] := "Hostring: Replace with next Tuesday's date"
+__help["next_Wed"] := "Hostring: Replace with next Wednesday's date"
+__help["nWed"] := "Hostring: Replace with next Wednesday's date"
+__help["next_Thu"] := "Hostring: Replace with next Thursday's date"
+__help["nThu"] := "Hostring: Replace with next Thursday's date"
+__help["next_Fri"] := "Hostring: Replace with next Friday's date"
+__help["nFri"] := "Hostring: Replace with next Friday's date"
+__help["next_Sat"] := "Hostring: Replace with next Saturday's date"
+__help["nSat"] := "Hostring: Replace with next Saturday's date"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -177,21 +179,21 @@ Show(command, key) {
 }
 
 Main() {
-	params := []
+    params := []
 
-	for index, param in A_Args {
-		if (StrLen(param) > 0) {
-			params.Push(param)
-		}
-	}
+    for index, param in A_Args {
+        if (StrLen(param) > 0) {
+            params.Push(param)
+        }
+    }
 
-	if (params.MaxIndex() = 1) {
-		Call(params[1])
-		Monitor.Exit()
-	} else if (params.MaxIndex() > 1) {
-		Show(params[1], params[2])
-		Monitor.Exit()
-	}
+    if (params.MaxIndex() = 1) {
+        Call(params[1])
+        Monitor.Exit()
+    } else if (params.MaxIndex() > 1) {
+        Show(params[1], params[2])
+        Monitor.Exit()
+    }
 }
 
 Main()
@@ -267,6 +269,7 @@ GetDateAndTime() {
 }
 
 GetNextDate(dayCode, factor := 1) {
+	global
     distance := factor * (dayCode - A_WDay)
     distance := distance < 0 ? 7 + distance : distance
     date := A_Year
@@ -490,7 +493,6 @@ TogglePaneInExplorer(letter) {
         SendInput !v%letter%
 }
 
-; http://www.autohotkey.com/board/topic/121208-windows-explorer-get-folder-path/
 Explorer_GetSelection(hwnd = "") {
     WinGet, process, processName, % "ahk_id" hwnd := hwnd ? hwnd : WinExist("A")
     WinGetClass class, ahk_id %hwnd%
@@ -513,7 +515,6 @@ Explorer_GetSelection(hwnd = "") {
     return Trim(ToReturn, "`n")
 }
 
-; http://www.autohotkey.com/board/topic/121208-windows-explorer-get-folder-path/
 GetItemNamesFromCurrentExplorerWindow(hwnd = "") {
     hwnd := hwnd ? hwnd : WinExist("A")
     WinGet, process, ProcessName, ahk_id %hwnd%
@@ -546,12 +547,28 @@ GetLatestDatedItemNameInExplorerWindow() {
     return GetLatestDatedItemName(GetItemNamesFromCurrentExplorerWindow())
 }
 
-GetTopLogicalDiskId() {
-    drive_type := 3
+GetLogicalDiskId(drive_type, position) {
+
+	; drive_type
+	; ----------
+	; 2 - Removable
+	; 3 - Local Fixed
+	; 
+	; position
+	; --------
+	; <= 0 - The last drive in the list
+	; >  0 - The drive at this position in the list
+	
     query := "Select * FROM Win32_LogicalDisk WHERE DriveType = " . drive_type
-    
-    for disk in (ComObjGet("winmgmts:").ExecQuery(query)) {
+    count := 0
+	
+	for disk in (ComObjGet("winmgmts:").ExecQuery(query)) {
         top_drive := disk.DeviceID
+		count := count + 1
+		
+		if (count = position) {
+			return top_drive
+		}
     }
     
     return top_drive
@@ -654,7 +671,6 @@ ListHotkeys(use_confirmation_dialog) {
 ; --- Hotkeys --- ;
 ;;;;;;;;;;;;;;;;;;;
 
-; Oh this? Just a little, *experiment*.
 >!RCtrl::AppsKey
 >^RAlt::AppsKey
 
@@ -662,25 +678,14 @@ ListHotkeys(use_confirmation_dialog) {
 ; --- Command Strings --- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Temporarily disable this script
     
-; Re-enable this script
     
-; Terminate AutoHotkey and the expected compiled version of this script
     
-; Kill all Web browser applications
     
-; Display Help Message
     
-; Toggle Preview Pane in Windows Explorer
     
-; Toggle Details Pane in Windows Explorer
     
-; Opens a date-select calendar, allowing the user to choose a date to replace this
-; hotstring with
     
-; Opens a list of title formats, allowing the user to choose one to replace this
-; hotstring with
     
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -689,17 +694,12 @@ ListHotkeys(use_confirmation_dialog) {
 
 ; Send keystrokes from clipboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Replace with the title-case version of the clipboard string
     
-; Replace backslashes with slashes
     
-; Replace slashes with backslashes
     
 ; Alter content on the clipboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Replace all tabs with spaces on the clipboard
+    
     
     
     
@@ -709,29 +709,22 @@ ListHotkeys(use_confirmation_dialog) {
     
 ; Replace hotstring
 ;;;;;;;;;;;;;;;;;;;
-
-; Replace with the device ID of the top logical disk drive
     
-; Replace with current date in standard "yyyy_MM_dd" format
     
-; Replace with current date in pretty "d MMMM yyyy" format
     
-; Replace with current time
     
-; Replace with current date and time
     
-; Replace with the latest datetime string occurring in
-; the currently active explorer window
     
-; Replace with a title-corrected string from the Clipboard
+; ; Hotstring: Replace with the latest datetime string occurring in the currently
+; ; active explorer window; (works best when Listary is enabled)
+; :*:;last;::
+;     Monitor.Run("GetLatestDatedItemNameInExplorerWindow")
+;     return
     
-; Replace with current date and title string
     
-; Replace with current date and time and title string
     
-; Replace with current date and title string
     
-; Replace with current date and time and title string
+    
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; --- Replace With Last Weekday's Date --- ;
@@ -761,7 +754,6 @@ ListHotkeys(use_confirmation_dialog) {
 
 ; ShowCalendar
 ;;;;;;;;;;;;;;
-
 ShowCalendar:
     Gui, Destroy
     Gui, Add, MonthCal, vMyCalendar
@@ -808,7 +800,6 @@ CopyDate:
     
 ; ShowTitleFormatListView
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ShowTitleFormatListView:
     Gui, Destroy
     Gui, Add, ListView, w500 -Multi -ReadOnly, Press Enter to select a format.
@@ -885,7 +876,6 @@ CopyTitle:
     
 ; Other Subroutines
 ;;;;;;;;;;;;;;;;;;;
-
 UnmapKeys:
 	if (__mapped_keys) {
 		Hotkey, ~F5, Off
@@ -901,7 +891,6 @@ GuiEscape:
     Gosub, UnmapKeys
 	Monitor.Unblock()
     Return
-    
 
 
 ; ***********************
@@ -1016,126 +1005,131 @@ function_0019() {
 
 function_0020() {
     global
-    return Monitor.Run("GetTopLogicalDiskId")
+    return Monitor.Clip("GetLatestDatedItemNameInExplorerWindow")
 }
 
 function_0021() {
     global
-    return Monitor.Run("GetStdDate")
+    return Monitor.Run("GetLogicalDiskId", 3, 0)
 }
 
 function_0022() {
     global
-    return Monitor.Run("GetPrettyDate")
+    return Monitor.Run("GetLogicalDiskId", 2, 1)
 }
 
 function_0023() {
     global
-    return Monitor.Run("GetTime")
+    return Monitor.Run("GetStdDate")
 }
 
 function_0024() {
     global
-    return Monitor.Run("GetDateAndTime")
+    return Monitor.Run("GetPrettyDate")
 }
 
 function_0025() {
     global
-    return Monitor.Run("GetLatestDatedItemNameInExplorerWindow")
+    return Monitor.Run("GetTime")
 }
 
 function_0026() {
+    global
+    return Monitor.Run("GetDateAndTime")
+}
+
+function_0027() {
     global
     ; Run("ToUpperCamelCase", Clipboard)
     return Monitor.Run("GetSubtitle", Clipboard, __secnd_separator)
 }
 
-function_0027() {
+function_0028() {
     global
     return Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_", __secnd_separator)
 }
 
-function_0028() {
+function_0029() {
     global
     return Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_", __secnd_separator)
 }
 
-function_0029() {
+function_0030() {
     global
     return Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_-_", __secnd_separator)
 }
 
-function_0030() {
+function_0031() {
     global
     return Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_-_", __secnd_separator)
 }
 
-function_0031() {
+function_0032() {
     global
     return Monitor.Run("GetLastDate", 1)
 }
 
-function_0032() {
+function_0033() {
     global
     return Monitor.Run("GetLastDate", 2)
 }
 
-function_0033() {
+function_0034() {
     global
     return Monitor.Run("GetLastDate", 3)
 }
 
-function_0034() {
+function_0035() {
     global
     return Monitor.Run("GetLastDate", 4)
 }
 
-function_0035() {
+function_0036() {
     global
     return Monitor.Run("GetLastDate", 5)
 }
 
-function_0036() {
+function_0037() {
     global
     return Monitor.Run("GetLastDate", 6)
 }
 
-function_0037() {
+function_0038() {
     global
     return Monitor.Run("GetLastDate", 7)
 }
 
-function_0038() {
+function_0039() {
     global
     return Monitor.Run("GetNextDate", 1)
 }
 
-function_0039() {
+function_0040() {
     global
     return Monitor.Run("GetNextDate", 2)
 }
 
-function_0040() {
+function_0041() {
     global
     return Monitor.Run("GetNextDate", 3)
 }
 
-function_0041() {
+function_0042() {
     global
     return Monitor.Run("GetNextDate", 4)
 }
 
-function_0042() {
+function_0043() {
     global
     return Monitor.Run("GetNextDate", 5)
 }
 
-function_0043() {
+function_0044() {
     global
     return Monitor.Run("GetNextDate", 6)
 }
 
-function_0044() {
+function_0045() {
     global
     return Monitor.Run("GetNextDate", 7)
 }
@@ -1168,12 +1162,13 @@ function_0044() {
 :*:;condense;::
 :*:;condense_tab4;::
 :*:;condense_tab8;::
+:*:;last;::
 :*:;top;::
+:*:;rem;::
 :*:;date;::
 :*:;prettydate;::
 :*:;time;::
 :*:;datetime;::
-:*:;last;::
 :*:;title;::
 :*:;d_title;::
 :*:;dt_title;::

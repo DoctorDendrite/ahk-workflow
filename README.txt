@@ -109,3 +109,13 @@
         Added ``global`` so `%__date_format%` expansion resolves correctly
         
 *. 2019_11_20   New: .gitignore
+*. 2019_11_23   Mod: Hotstrings\Hotstrings.ahk
+
+    Added new documentation to hotstrings
+    Added "Hotstring:" and "Hotkey:" key phrases to help identify help info
+    Changed ";last;" hotstring to use the clipboard instead of sending keystrokes
+    
+*. 2019_11_23   Mod: Convert-HotstringsToMappedFunctions.ahk
+
+    Redesigned FileIterator class to use File objects instead of `FileReadLine` subroutine
+    

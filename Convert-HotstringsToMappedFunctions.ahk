@@ -73,21 +73,21 @@ Show(command, key) {
 }
 
 Main() {
-	params := []
-	
-	for index, param in A_Args {
-		if (StrLen(param) > 0) {
-			params.Push(param)
-		}
-	}
-	
-	if (params.MaxIndex() = 1) {
-		Call(params[1])
-		Monitor.Exit()
-	} else if (params.MaxIndex() > 1) {
-		Show(params[1], params[2])
-		Monitor.Exit()
-	}
+    params := []
+    
+    for index, param in A_Args {
+        if (StrLen(param) > 0) {
+            params.Push(param)
+        }
+    }
+    
+    if (params.MaxIndex() = 1) {
+        Call(params[1])
+        Monitor.Exit()
+    } else if (params.MaxIndex() > 1) {
+        Show(params[1], params[2])
+        Monitor.Exit()
+    }
 }
 
 Main()
@@ -106,9 +106,8 @@ class FileIterator {
     static __INVALID_FILENAME := "<Null>"
     
     __filename := __INVALID_FILENAME
-    __position := 0
+    __file := __INVALID_FILENAME
     __current := ""
-    __any := 1
     
     InstanceMethod() {
         if (this.__filename = FileIterator.__INVALID_FILENAME)
@@ -117,6 +116,15 @@ class FileIterator {
     
     __New(filename) {
         this.__filename := filename
+        this.__file := FileOpen(filename, "r-d `n")
+        
+        if (!IsObject(this.__file)) {
+            throw Exception("FILE OBJECT NOT INITIALIZED")
+        }
+    }
+    
+    __Delete() {
+        this.Close()
     }
     
     Filename() {
@@ -126,43 +134,20 @@ class FileIterator {
     
     Next(ByRef line) {
         FileIterator.InstanceMethod()
-        this.__position := this.__position + 1
-        FileReadLine, what, % this.__filename, % this.__position
-        this.__current := what
-        this.__any := ErrorLevel = 0
+        this.__current := RTrim(this.__file.ReadLine(), "`r`n")
         
-        if (this.__any)
+        if (this.Any())
             line := this.__current
-        
-        return this.__any
-    }
-    
-    Prev(ByRef line) {
-        FileIterator.InstanceMethod()
-        this.__position := this.__position - 1
-        FileReadLine, what, % this.__filename, % this.__position
-        this.__current := what
-        this.__any := ErrorLevel = 0
-        
-        if (this.__any)
-            line := this.__current
-        
-        return this.__any
+            
+        return this.Any()
     }
     
     NextNonWhiteSpace(ByRef line) {
-        while (this.Next(line) and IsWhiteSpace(line)) {
+        while (this.Next(line) and IsWhiteSpace(line)) {  ; calls `InstanceMethod`
             ; Do nothing.
         }
         
-        return this.__any
-    }
-    
-    GoBack() {
-        FileIterator.InstanceMethod()
-        if (this.__position > 1) {
-            this.__position := this.__position - 1
-        }
+        return this.Any()
     }
     
     Current() {
@@ -172,15 +157,12 @@ class FileIterator {
     
     Any() {
         FileIterator.InstanceMethod()
-        return this.__any
+        return !this.__file.AtEOF
     }
     
-    Copy() {
-        other := New FileIterator(this.__filename)
-        other.__position := this.__position
-        other.__current := this.__current
-        other.__any := this.__any
-        return other
+    Close() {
+        FileIterator.InstanceMethod()
+        return this.__file.Close()
     }
 }
 
@@ -275,6 +257,12 @@ GetOutFileName(filename, suffix) {
     return A_ScriptDir . "\" . RegExReplace(GetShortName(filename), "\.ahk$", suffix . ".ahk")
 }
 
+HelpSequence(line, ByRef out) {
+    position := RegExMatch(line, "O)^\s*;\s*(?<TYPE>\w+):", match)
+    out := match.Value("TYPE")
+    return position > 0
+}
+
 HotstringSequence(line, ByRef out) {
     position := RegExMatch(line, "O)^:[^:]*:;(?<NAME>[^:]+);:[^:]*:", match)
     out := match.Value("NAME")
@@ -324,33 +312,6 @@ GetDefinition(commands, name) {
     str .= ListToString(commands, "`r`n")
     str .= "`r`n}"
     return str
-}
-
-GetGlobalVariables(ByRef it) {
-    globals := []
-    cit := it.Copy()
-    
-    cit.GoBack()
-    cit.GoBack()
-    
-    if (cit.Next(line) and IsCommentBarLine(line)) {
-        globals.Push(line)
-        
-        while (cit.Next(line) and !IsCommentBarLine(line)) {
-            globals.Push(line)
-        }
-        
-        if (IsCommentBarLine(line)) {
-            globals.Push(line)
-        }
-    }
-    
-    while (cit.Next(line) and !IsCommentBarLine(line)) {
-        globals.Push(line)
-    }
-    
-    it := cit.Copy()
-    return globals
 }
 
 GetAddToMapCommand(map_name, hotstring, function_name) {
@@ -404,30 +365,30 @@ SubtractWhiteSpace(lines, ByRef start, ByRef end) {
 GetSectionHeading(ByRef it, ByRef str, ByRef lines) {
     lines := []
     lines.Push(it.Current())
-    cit := it.Copy()
-    cit.Next(line)
-    lines.Push(cit.Current())
-    position := RegExMatch(cit.Current(), "O)--- (?<NAME>.+) ---", match)
+    
+    it.Next(line)
+    lines.Push(it.Current())
+    position := RegExMatch(it.Current(), "O)--- (?<NAME>.+) ---", match)
     
     if (position > 0) {
         str := match.Value("NAME")
         StringUpper, str, str
-        cit.Next(line)
-        lines.Push(cit.Current())
-        it := cit
+        it.Next(line)
+        lines.Push(it.Current())
     }
     
     return position
 }
 
 GetDocString(it) {
-    cit := it.Copy()
     str := ""
+    line := it.Current()
     
-    while (cit.Prev(line) and IsCommentLine(line)) {
+    while (it.Any() and IsCommentLine(line)) {
         line := RegExReplace(line, "^\s*`;\s*|\s*$", "")
         line := RegExReplace(line, """", """""")
-        str := (str = "") ? line : line " " str
+        str := (str = "") ? line : str " " line
+        it.Next(line)
     }
     
     return str
@@ -457,6 +418,75 @@ Main(infile, outfile) {
         FileOutLine("#Persistent", outfile)
     }
     
+    
+    
+    
+    ; it := New FileIterator(infile)
+    ; str := ""
+    ; 
+    ; it.Next(line)
+    ; 
+    ; ; MsgBox, % "Any: [" it.Any() "]"
+    ; 
+    ; while (it.Any()) {
+    ;   str := ""
+    ;   other := ""
+    ;   
+    ;   
+    ;   ; MsgBox, % "What: [" line "]"
+    ;   
+    ;   
+    ;   if (IsWhiteSpace(line)) {
+    ;       str := "IsWhiteSpace"
+    ;       
+    ;       ; MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
+    ;       it.Next(line)
+    ;       
+    ;   } else if (IsHeader(line)) {
+    ;       str := "IsHeader"
+    ;       
+    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
+    ;       it.Next(line)
+    ;       
+    ;   } else if (IsCommentBarLine(line)) {
+    ;       str := "IsCommentBarLine"
+    ;       
+    ;       GetSectionHeading(it, section_heading, lines)
+    ;       
+    ;         for index, line in lines {
+    ;             other := section_heading
+    ;         }
+    ;       
+    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
+    ;       it.Next(line)
+    ;       
+    ;   } else if (HelpSequence(line, other)) {
+    ;       str := "IsHelpSequence"
+    ;       help_str := GetDocString(it)
+    ;       
+    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
+    ;       MsgBox, %help_str%
+    ;       
+    ;       line := it.Current()
+    ;       
+    ;   } else if (HotstringSequence(line, other)) {
+    ;       str := "IsHotstringSequence"
+    ;       
+    ;       MsgBox, % str "`r`nLine: [" line "]`r`nOther: [" other "]"
+    ;       FileOutLine(line, "temp.txt")
+    ;       it.Next(line)
+    ;       
+    ;   } else {
+    ;       str := "IsOtherContent"
+    ;       it.Next(line)
+    ;   }
+    ; }
+    ; 
+    ; return
+    
+    
+    
+    
     it := New FileIterator(infile)
     
     while (it.NextNonWhiteSpace(line) and IsHeader(line)) {
@@ -478,27 +508,33 @@ Main(infile, outfile) {
     commands := []
     definitions := []
     other := []
-    globals := []
     number := 0
+    help_str := ""
     
     sections := New Table
     
-    it.GoBack()
-    
-    while (it.Next(line)) {
+    while (it.Any()) {
         if (IsCommentBarLine(line) and GetSectionHeading(it, section_heading, lines) > 0) {
-
+        
             for index, line in lines {
                 sections.Add(section_heading, line)
             }
-
+            
+            it.Next(line)
+            
+        } else if (HelpSequence(line, out)) {
+        
+            help_str := GetDocString(it)
+            line := it.Current()
+            
         } else if (HotstringSequence(line, out)) {
-
+        
             hotstrings_per_def.Push(out)
             hotstring_names.Push(out)
             hotstring_lines.Push(line)
-            help[out] := GetDocString(it)
-
+            help[out] := help_str
+            it.Next(line)
+            
         } else if (Any(hotstrings_per_def)) {
         
             if (ReturnSequence(line)) {
@@ -524,8 +560,12 @@ Main(infile, outfile) {
                 commands.Push(line)
             }
             
+            it.Next(line)
+            
         } else if (ADD_ALL) {
+        
             sections.Add(section_heading, line)
+            it.Next(line)
         }
     }
     

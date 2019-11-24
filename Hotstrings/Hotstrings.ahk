@@ -489,7 +489,7 @@ ListHotkeys(use_confirmation_dialog) {
 ; --- Hotkeys --- ;
 ;;;;;;;;;;;;;;;;;;;
 
-; Oh this? Just a little, *experiment*.
+; Hotkey: Oh this? Just a little, *experiment*.
 >!RCtrl::AppsKey
 >^RAlt::AppsKey
 
@@ -497,17 +497,17 @@ ListHotkeys(use_confirmation_dialog) {
 ; --- Command Strings --- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Temporarily disable this script
+; Hostring: Temporarily disable this script
 ::;stop;::
     Monitor.Disable()
     return
     
-; Re-enable this script
+; Hostring: Re-enable this script
 ::;start;::
     Monitor.Enable()
     return
     
-; Terminate AutoHotkey and the expected compiled version of this script
+; Hostring: Terminate AutoHotkey and the expected compiled version of this script
 ::;kill;::
     master_proc := Monitor.MasterProcessName()  
     processes := ["AutoHotkey.exe", master_proc]
@@ -515,43 +515,44 @@ ListHotkeys(use_confirmation_dialog) {
     Monitor.Override("KillAllProcesses", processes, master_proc, msg)
     return
     
-; Kill all Web browser applications
+; Hostring: Kill all Web browser applications
 ::;panic;::
     msg := GetKillAllMessage(processes)
     Monitor.Override("KillAllProcesses", __browser_process_names)
     return
     
-; Display Help Message
+; Hostring: Display Help Message
 ::;help;::
     Monitor.Override("DisplayHelpMessage")
     return
     
-; Toggle Preview Pane in Windows Explorer
+; Hostring: Toggle Preview Pane in Windows Explorer
 ::;ppane;::
 ::;preview;::
     Monitor.Override("TogglePaneInExplorer", "p")
     return
     
-; Toggle Details Pane in Windows Explorer
+; Hostring: Toggle Details Pane in Windows Explorer
 ::;dpane;::
 ::;details;::
     Monitor.Override("TogglePaneInExplorer", "d")
     return
     
-; Opens a date-select calendar, allowing the user to choose a date to replace this
-; hotstring with
+; Hostring: Opens a date-select calendar, allowing the user to choose a date to
+; replace this hotstring with
 ::;calendar;::
 	Monitor.Block()
     Monitor.VerifyAndGo("ShowCalendar")
     return
     
-; Opens a list of title formats, allowing the user to choose one to replace this
-; hotstring with
+; Hostring: Opens a list of title formats, allowing the user to choose one to replace
+; this hotstring with
 ::;formats;::
 	Monitor.Block()
     Monitor.VerifyAndGo("ShowTitleFormatListView")
     return
     
+; Hostring: List all hotkeys
 ::;list;::
 	Monitor.Override("ListHotkeys", !A_ThisHotkey)
     return
@@ -563,18 +564,18 @@ ListHotkeys(use_confirmation_dialog) {
 ; Send keystrokes from clipboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Replace with the title-case version of the clipboard string
+; Hotstring: Replace with the title-case version of the clipboard string
 :*:;t;::
 :*:;titlecase;::
     Monitor.Run("ToTitleCase", Clipboard)
     return
     
-; Replace backslashes with slashes
+; Hotstring: Replace backslashes with slashes
 :*:;tounix;::
     Monitor.Run("ToUnixString", Clipboard)
     return
     
-; Replace slashes with backslashes
+; Hotstring: Replace slashes with backslashes
 :*:;todos;::
     Monitor.Run("ToDosString", Clipboard)
     return
@@ -582,96 +583,114 @@ ListHotkeys(use_confirmation_dialog) {
 ; Alter content on the clipboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Replace all tabs with spaces on the clipboard
+; Hotstring: Replace all tabs with spaces on the clipboard
 :*:;tab2space;::
     Monitor.Clip("ReplaceTabsWithSpaces", Clipboard)
     return
     
+; Hotstring: Add word-wrapped line breaks to text on the clipboard;
+; (default tab size is 4)
 :*:;block;::
     Monitor.Override("PasteBlockText", Clipboard, __tab_size, __note_width)
     return
     
+; Hotstring: Add word-wrapped line breaks to text on the clipboard;
+; (make sure the tab size is 4)
 :*:;block_tab4;::
     Monitor.Run("PasteBlockText", Clipboard, 4, __note_width)
     return
     
+; Hotstring: Add word-wrapped line breaks to text on the clipboard;
+; (make sure the tab size is 8)
 :*:;block_tab8;::
     Monitor.Run("PasteBlockText", Clipboard, 8, __note_width)
     return
     
+; Hotstring: Combine consecutive lines of content to a single line on the clipboard;
+; (default tab size is 4)
 :*:;condense;::
     Monitor.Override("PasteCondensedBlockText", Clipboard, __tab_size, __note_width)
     return
     
+; Hotstring: Combine consecutive lines of content to a single line on the clipboard;
+; (make sure the tab size is 4)
 :*:;condense_tab4;::
     Monitor.Run("PasteCondensedBlockText", Clipboard, 4, __note_width)
     return
     
+; Hotstring: Combine consecutive lines of content to a single line on the clipboard;
+; (make sure the tab size is 8)
 :*:;condense_tab8;::
     Monitor.Run("PasteCondensedBlockText", Clipboard, 8, __note_width)
+    return
+    
+; Hotstring: Copy to clipboard the latest datetime string occurring in the currently
+; active explorer window
+:*:;last;::
+    Monitor.Clip("GetLatestDatedItemNameInExplorerWindow")
     return
     
 ; Replace hotstring
 ;;;;;;;;;;;;;;;;;;;
 
-; Replace with the device ID of the last local fixed disk drive
+; Hotstring: Replace with the device ID of the last local fixed disk drive
 :*:;top;::
     Monitor.Run("GetLogicalDiskId", 3, 0)
     return
     
-; Replace with the device ID of the first removable disk drive
+; Hotstring: Replace with the device ID of the first removable disk drive
 :*:;rem;::
     Monitor.Run("GetLogicalDiskId", 2, 1)
     return
     
-; Replace with current date in standard "yyyy_MM_dd" format
+; Hotstring: Replace with current date in standard "yyyy_MM_dd" format
 :*:;date;::
     Monitor.Run("GetStdDate")
     return
     
-; Replace with current date in pretty "d MMMM yyyy" format
+; Hotstring: Replace with current date in pretty "d MMMM yyyy" format
 :*:;prettydate;::
     Monitor.Run("GetPrettyDate")
     return
     
-; Replace with current time
+; Hotstring: Replace with current time
 :*:;time;::
     Monitor.Run("GetTime")
     return
     
-; Replace with current date and time
+; Hotstring: Replace with current date and time
 :*:;datetime;::
     Monitor.Run("GetDateAndTime")
     return
     
-; Replace with the latest datetime string occurring in
-; the currently active explorer window
-:*:;last;::
-    Monitor.Run("GetLatestDatedItemNameInExplorerWindow")
-    return
+; ; Hotstring: Replace with the latest datetime string occurring in the currently
+; ; active explorer window; (works best when Listary is enabled)
+; :*:;last;::
+;     Monitor.Run("GetLatestDatedItemNameInExplorerWindow")
+;     return
     
-; Replace with a title-corrected string from the Clipboard
+; Hotstring: Replace with a title-corrected string from the Clipboard
 :*:;title;::
     ; Run("ToUpperCamelCase", Clipboard)
     Monitor.Run("GetSubtitle", Clipboard, __secnd_separator)
     return
     
-; Replace with current date and title string
+; Hotstring: Replace with current date and title string
 :*:;d_title;::
     Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_", __secnd_separator)
     return
     
-; Replace with current date and time and title string
+; Hotstring: Replace with current date and time and title string
 :*:;dt_title;::
     Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_", __secnd_separator)
     return
     
-; Replace with current date and title string
+; Hotstring: Replace with current date and title string
 :*:;d_-_title;::
     Monitor.Run("GetTitle", GetStdDate(), Clipboard, "_-_", __secnd_separator)
     return
     
-; Replace with current date and time and title string
+; Hotstring: Replace with current date and time and title string
 :*:;dt_-_title;::
     Monitor.Run("GetTitle", GetDateAndTime(), Clipboard, "_-_", __secnd_separator)
     return
@@ -680,36 +699,43 @@ ListHotkeys(use_confirmation_dialog) {
 ; --- Replace With Last Weekday's Date --- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Hostring: Replace with last Sunday's date
 :*:;last_Sun;::
 :*:;lSun;::
     Monitor.Run("GetLastDate", 1)
     return
     
+; Hostring: Replace with last Monday's date
 :*:;last_Mon;::
 :*:;lMon;::
     Monitor.Run("GetLastDate", 2)
     return
     
+; Hostring: Replace with last Tuesday's date
 :*:;last_Tue;::
 :*:;lTue;::
     Monitor.Run("GetLastDate", 3)
     return
     
+; Hostring: Replace with last Wednesday's date
 :*:;last_Wed;::
 :*:;lWed;::
     Monitor.Run("GetLastDate", 4)
     return
     
+; Hostring: Replace with last Thursday's date
 :*:;last_Thu;::
 :*:;lThu;::
     Monitor.Run("GetLastDate", 5)
     return
     
+; Hostring: Replace with last Friday's date
 :*:;last_Fri;::
 :*:;lFri;::
     Monitor.Run("GetLastDate", 6)
     return
     
+; Hostring: Replace with last Saturday's date
 :*:;last_Sat;::
 :*:;lSat;::
     Monitor.Run("GetLastDate", 7)
@@ -719,36 +745,43 @@ ListHotkeys(use_confirmation_dialog) {
 ; --- Replace With Next Weekday's Date --- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Hostring: Replace with next Sunday's date
 :*:;next_Sun;::
 :*:;nSun;::
     Monitor.Run("GetNextDate", 1)
     return
     
+; Hostring: Replace with next Monday's date
 :*:;next_Mon;::
 :*:;nMon;::
     Monitor.Run("GetNextDate", 2)
     return
     
+; Hostring: Replace with next Tuesday's date
 :*:;next_Tue;::
 :*:;nTue;::
     Monitor.Run("GetNextDate", 3)
     return
     
+; Hostring: Replace with next Wednesday's date
 :*:;next_Wed;::
 :*:;nWed;::
     Monitor.Run("GetNextDate", 4)
     return
     
+; Hostring: Replace with next Thursday's date
 :*:;next_Thu;::
 :*:;nThu;::
     Monitor.Run("GetNextDate", 5)
     return
     
+; Hostring: Replace with next Friday's date
 :*:;next_Fri;::
 :*:;nFri;::
     Monitor.Run("GetNextDate", 6)
     return
     
+; Hostring: Replace with next Saturday's date
 :*:;next_Sat;::
 :*:;nSat;::
     Monitor.Run("GetNextDate", 7)
